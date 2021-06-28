@@ -134,7 +134,7 @@ example(of: "assign(to:)") {
     
     let object = SomeObject()
     
-    // 2 Use $ prefix on @Published property to gin access to its underlying publisher, subscribe to it and print values
+    // 2 Use $ prefix on @Published property to gain access to its underlying publisher, subscribe to it and print values
     object.$value
         .sink {
             print($0)
