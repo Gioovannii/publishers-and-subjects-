@@ -153,19 +153,22 @@ example(of: "Custom Subscriber") {
     
     // 2 Custom subscriber
     final class IntSubscriber: Subscriber {
-        // TypeAlias => Subscriber can receive Int input / will never receive error
+        // 3 TypeAlias => Subscriber can receive Int input / will never receive error
         typealias Input = Int
         typealias Failure = Never
         
+        // 4 Methods called by publisher using call on subscription specify subscriber receive 3 subs max.
         func receive(subscription: Subscription) {
             subscription.request(.max(3))
         }
         
+        // 5 print each values nd return none
         func receive(_ input: Int) -> Subscribers.Demand {
             print("Received value", input)
             return .none
         }
         
+        // 6 Print completion
         func receive(completion: Subscribers.Completion<Never>) {
             print("Receive completion", completion)
         }
