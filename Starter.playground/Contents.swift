@@ -36,28 +36,24 @@ import Combine
 
 var subscriptions = Set<AnyCancellable>()
 
-//example(of: "Publisher") {
-//    // 1 Create notification name
-//    let myNotification = Notification.Name("MyNotification")
-//
-//    // 2 Access notification center call it's publisher method and assign value to a constant
-//    let publisher = NotificationCenter.default
-//        .publisher(for: myNotification, object: nil)
-//
-//    // 3 Get a handle to the notification center
-//    let center = NotificationCenter.default
-//
-//    // 4 Create observer to listen for notification
-//    let observer = center.addObserver(forName: myNotification, object: nil, queue: nil) { notification in
-//        print("Notification received!")
-//    }
-//    // 5 Post notification with that name
-//    center.post(name: myNotification, object: nil)
-//
-//    // 6 Remove observer from notification center
-//    center.removeObserver(observer)
-//}
-
-
-
-
+example(of: "Publisher") {
+    // 1 Create notification name
+    let myNotification = Notification.Name("MyNotification")
+    
+    // 2 Access notification center call it's publisher method and assign value to a constant
+    let _ = NotificationCenter.default
+        .publisher(for: myNotification, object: nil)
+    
+    // 3 Get a handle to the notification center
+    let center = NotificationCenter.default
+    
+    // 4 Create observer to listen for notification
+    let observer = center.addObserver(forName: myNotification, object: nil, queue: nil) { notification in
+        print("Notification received!")
+    }
+    // 5 Post notification with that name
+    center.post(name: myNotification, object: nil)
+    
+    // 6 Remove observer from notification center
+    center.removeObserver(observer)
+}
