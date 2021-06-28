@@ -81,3 +81,17 @@ example(of: "Subscriber") {
     // 3 cancel subscription
     subscription.cancel()
 }
+
+example(of: "Just") {
+    // 1 Create pubkisher using Just => create publisher from a primitive value type
+    let just = Just("Hello world!")
+    
+    // 2 Create subscription to the publisher and print messages
+    _ = just
+        .sink(
+            receiveCompletion: {
+                print("Received completion", $0)
+            },
+            receiveValue: {
+                print("Received value", $0)
+            })
