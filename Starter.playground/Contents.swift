@@ -104,3 +104,24 @@ example(of: "Just") {
             })
 }
 
+example(of: "assign(to:on:)") {
+    // 1 Define class with a property that has a didSet that prints new value
+    class SomeObject {
+        var value: String = "" {
+            didSet {
+                print(value)
+            }
+        }
+    }
+    
+    // 2create an instance
+    let object = SomeObject()
+    
+    // 3 Create a pusblisher from an array of strings
+    let publisher = ["Hello", "world!"].publisher
+    
+    //4 Subscribe to the publisher, assigning each value received to the value property of the object
+    _ = publisher
+        .assign(to: \.value, on: object)
+}
+
