@@ -125,3 +125,24 @@ example(of: "assign(to:on:)") {
         .assign(to: \.value, on: object)
 }
 
+example(of: "assign(to:)") {
+    // 1 Define and create an instance of a class with propert annoted with @published property wrapper
+    // Which create a publisher for  value
+    class SomeObject {
+        @Published var value = 0
+    }
+    
+    let object = SomeObject()
+    
+    // 2 Use $ prefix on @Published property to gin access to its underlying publisher, subscribe to it and print values
+    object.$value
+        .sink {
+            print($0)
+        }
+    
+    // 3 Create a publisher of numbers and assign each values it emits to the value publisher of object
+    // note the use of & to denout inout reference to property
+    (0..<10).publisher
+        .assign(to: &object.$value)
+}
+
