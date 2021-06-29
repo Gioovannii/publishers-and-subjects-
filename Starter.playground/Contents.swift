@@ -221,5 +221,11 @@ example(of: "PassthroughSubject") {
             subscription.request(.max(2))
         }
         
+        func receive(_ input: String) -> Subscribers.Demand {
+            print("Received value", input)
+            // 3 adjust demand base on value
+            return input == "World" ? .max(1) : .none
+        }
+        
        
 }
