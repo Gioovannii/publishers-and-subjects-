@@ -210,10 +210,10 @@ example(of: "PassthroughSubject") {
         case test
     }
     
-   
+    
     // 2 custom subscriber receive string and myError errors
     final class StringSubscriber: Subscriber {
-
+        
         typealias Input = String
         typealias Failure = MyError
         
