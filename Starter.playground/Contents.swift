@@ -217,5 +217,9 @@ example(of: "PassthroughSubject") {
         typealias Input = String
         typealias Failure = MyError
         
+        func receive(subscription: Subscription) {
+            subscription.request(.max(2))
+        }
+        
        
 }
