@@ -227,5 +227,11 @@ example(of: "PassthroughSubject") {
             return input == "World" ? .max(1) : .none
         }
         
-       
+        func receive(completion: Subscribers.Completion<MyError>) {
+            print("Received Completion", completion)
+        }
+    }
+    
+    // 4 create an instance
+    let subscriber = StringSubscriber()
 }
