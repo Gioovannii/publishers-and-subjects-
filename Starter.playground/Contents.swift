@@ -173,4 +173,6 @@ example(of: "Custom Subscriber") {
             print("Receive completion", completion)
         }
     }
+    let subscriber = IntSubscriber()
+    publisher.subscribe(subscriber)
 }
