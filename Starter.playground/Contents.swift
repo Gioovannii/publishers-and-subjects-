@@ -186,4 +186,13 @@ example(of: "Future") {
             }
         }
     }
-   
+    
+    // 1 Create future using function specify integer passed after 3 second delay
+    let future = futurIncrement(integer: 1, afterDelay: 3)
+    
+    // 2 subscribe to print receive value and completion even and store result in subscriptions
+    future
+        .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
+        .store(in: &subscriptions)
+}
+
