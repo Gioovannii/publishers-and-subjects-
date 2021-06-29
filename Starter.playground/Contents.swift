@@ -204,4 +204,10 @@ example(of: "Custom Subscriber") {
 //    print("Original")
 //}
 
-}
+example(of: "PassthroughSubject") {
+    // 1 Custom error type
+    enum MyError: Error {
+        case test
+    }
+    
+   
