@@ -176,3 +176,14 @@ example(of: "Custom Subscriber") {
     let subscriber = IntSubscriber()
     publisher.subscribe(subscriber)
 }
+
+// Async produce single result and complete
+example(of: "Future") {
+    func futurIncrement(integer: Int, afterDelay delay: TimeInterval) -> Future<Int, Never> {
+        Future<Int, Never> { promise in
+            DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+                promise(.success(integer + 1))
+            }
+        }
+    }
+   
