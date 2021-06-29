@@ -177,22 +177,31 @@ example(of: "Custom Subscriber") {
     publisher.subscribe(subscriber)
 }
 
-// Async produce single result and complete
-example(of: "Future") {
-    func futurIncrement(integer: Int, afterDelay delay: TimeInterval) -> Future<Int, Never> {
-        Future<Int, Never> { promise in
-            DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
-                promise(.success(integer + 1))
-            }
-        }
-    }
-    
-    // 1 Create future using function specify integer passed after 3 second delay
-    let future = futurIncrement(integer: 1, afterDelay: 3)
-    
-    // 2 subscribe to print receive value and completion even and store result in subscriptions
-    future
-        .sink(receiveCompletion: { print($0) }, receiveValue: { print($0) })
-        .store(in: &subscriptions)
-}
+//// Async produce single result and complete
+//example(of: "Future") {
+//    func futurIncrement(integer: Int, afterDelay delay: TimeInterval) -> Future<Int, Never> {
+//        Future<Int, Never> { promise in
+//            DispatchQueue.global().asyncAfter(deadline: .now() + delay) {
+//                promise(.success(integer + 1))
+//            }
+//        }
+//    }
+//
+//    // 1 Create future using function specify integer passed after 3 second delay
+//    let future = futurIncrement(integer: 1, afterDelay: 3)
+//
+//    // 2 subscribe to print receive value and completion even and store result in subscriptions
+//    future
+//        .sink(receiveCompletion: { print($0) },
+//              receiveValue: { print($0) })
+//        .store(in: &subscriptions)
+//
+//    future
+//        .sink(receiveCompletion: { print("Second", $0)},
+//              receiveValue: { print("Second", $0) })
+//        .store(in: &subscriptions)
+//
+//    print("Original")
+//}
 
+}
