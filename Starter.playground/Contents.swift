@@ -231,7 +231,13 @@ example(of: "PassthroughSubject") {
             print("Received Completion", completion)
         }
     }
+        
+        // 4 create an instance
+        let subscriber = StringSubscriber()
     
-    // 4 create an instance
-    let subscriber = StringSubscriber()
+        let subject = PassthroughSubject<String, MyError>()
+        
+    subject.subscribe(subscriber)
+        
+    
 }
