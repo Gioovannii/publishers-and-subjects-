@@ -242,6 +242,9 @@ example(of: "PassthroughSubject") {
     subject.subscribe(subscriber)
     
     // 7
-   
+    let subscription = subject
+        .sink(receiveCompletion: { completion in
+            print("Received Completion (sink)", completion)
+        }, receiveValue: <#T##((String) -> Void)##((String) -> Void)##(String) -> Void#>)
     
 }
