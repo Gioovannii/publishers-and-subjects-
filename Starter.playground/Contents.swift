@@ -235,16 +235,19 @@ example(of: "PassthroughSubject") {
     // 4 create an instance
     let subscriber = StringSubscriber()
     
-    // 5
+    // 5 Create an instance of Passthrough of type String
     let subject = PassthroughSubject<String, MyError>()
     
-    // 6
+    // 6 subscribe subscriber to subject
     subject.subscribe(subscriber)
     
-    // 7
+    // 7 create another subscription using sink
     let subscription = subject
         .sink(receiveCompletion: { completion in
             print("Received Completion (sink)", completion)
-        }, receiveValue: <#T##((String) -> Void)##((String) -> Void)##(String) -> Void#>)
+        }, receiveValue: {value in
+            print("Received value (sink)", value)
+        })
+    
     
 }
