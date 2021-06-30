@@ -249,5 +249,6 @@ example(of: "PassthroughSubject") {
             print("Received value (sink)", value)
         })
     
-    
+    subject.send("Hello")
+    subject.send("World")
 }
