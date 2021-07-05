@@ -274,5 +274,9 @@ example(of: "CurrentValueSubject") {
     subject
         .sink(receiveValue: { print($0) })
         .store(in: &subscriptions ) // 4 Store the subscription
+    subject.send(1)
+    subject.send(2)
+    print(subject.value)
     
+  
 }
