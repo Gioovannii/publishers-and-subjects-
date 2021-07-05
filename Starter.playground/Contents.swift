@@ -251,4 +251,14 @@ example(of: "PassthroughSubject") {
     
     subject.send("Hello")
     subject.send("World")
+    
+    // 8. Cancel second subscription
+    subscription.cancel()
+    
+    // 9. Send another value
+    subject.send("Still here")
+    
+    subject.send(completion: .failure(MyError.test))
+    subject.send(completion: .finished)
+    subject.send("How about another one")
 }
