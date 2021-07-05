@@ -269,5 +269,10 @@ example(of: "CurrentValueSubject") {
     
     // 2 Create a currentValueSubject of type Int and Never. This will publish n error with initial value of 0
     let subject = CurrentValueSubject<Int, Never>(0)
-   
+    
+    // 3 create a subscription to the subject and print values received from it
+    subject
+        .sink(receiveValue: { print($0) })
+        .store(in: &subscriptions ) // 4 Store the subscription
+    
 }
