@@ -262,3 +262,12 @@ example(of: "PassthroughSubject") {
     subject.send(completion: .finished)
     subject.send("How about another one")
 }
+
+example(of: "CurrentValueSubject") {
+    // 1 create a subscription set
+    var subcription = Set<AnyCancellable>()
+    
+    // 2 Create a currentValueSubject of type Int and Never. This will publish n error with initial value of 0
+    let subject = CurrentValueSubject<Int, Never>(0)
+   
+}
