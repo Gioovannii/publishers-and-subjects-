@@ -278,5 +278,8 @@ example(of: "CurrentValueSubject") {
     subject.send(2)
     print(subject.value)
     
-  
+    subject.value = 3
+    print(subject.value)
+    
+   
 }
