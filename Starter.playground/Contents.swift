@@ -286,4 +286,5 @@ example(of: "CurrentValueSubject") {
         .print()
         .sink(receiveValue: { print("Second subscriptions:", $0) })
         .store(in: &subscriptions)
+    subject.send(completion: .finished)
 }
