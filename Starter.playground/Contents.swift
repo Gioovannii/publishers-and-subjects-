@@ -265,7 +265,7 @@ example(of: "PassthroughSubject") {
 
 example(of: "CurrentValueSubject") {
     // 1 create a subscription set
-    var subcription = Set<AnyCancellable>()
+    var subcriptions = Set<AnyCancellable>()
     
     // 2 Create a currentValueSubject of type Int and Never. This will publish n error with initial value of 0
     let subject = CurrentValueSubject<Int, Never>(0)
