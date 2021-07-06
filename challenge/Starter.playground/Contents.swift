@@ -27,14 +27,16 @@ example(of: "Create a Blackjack card dealer") {
         }
     }
     
-    // Add code to update dealtHand here
+    // Add subscription to dealtHand here
+    _ = dealtHand
+        .sink(receiveCompletion:  {
+            if case let .failure(error) = $0 { print(error)
+                }
+        } , receiveValue: { hand in
+            print(hand.cardString, "for", hand.points, "points")
+        })
     
-  }
-  
-  // Add subscription to dealtHand here
-  
-  
-  deal(3)
+    deal(3)
 }
 
 /// Copyright (c) 2020 Razeware LLC
