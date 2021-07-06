@@ -30,6 +30,17 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+// MARK: - Understanding
+
+"""
+Publisher           Subscriber
+    <----- Subscribes -------- 1
+   2 - gives subscription ---->
+    <----- Request values ---- 3
+   4 ----- send values ------->
+   5 ---- Send completion ---->
+
+"""
 
 import Foundation
 import Combine
@@ -146,6 +157,7 @@ example(of: "assign(to:)") {
         .assign(to: &object.$value)
 }
 
+// MARK: - Custom subscriber
 
 example(of: "Custom Subscriber") {
     // 1 Create publisher of integers range's publisher property
@@ -177,6 +189,8 @@ example(of: "Custom Subscriber") {
     publisher.subscribe(subscriber)
 }
 
+// MARK: - Hello future
+
 //// Async produce single result and complete
 //example(of: "Future") {
 //    func futurIncrement(integer: Int, afterDelay delay: TimeInterval) -> Future<Int, Never> {
@@ -203,6 +217,8 @@ example(of: "Custom Subscriber") {
 //
 //    print("Original")
 //}
+
+// MARK: - Hello subject
 
 example(of: "PassthroughSubject") {
     // 1 Custom error type
@@ -288,3 +304,69 @@ example(of: "CurrentValueSubject") {
         .store(in: &subscriptions)
     subject.send(completion: .finished)
 }
+
+// MARK: - Dynamically adjusting demand
+
+example(of: "Dynamically adjusting on demand") {
+    final class IntSubscriber: Subscriber {
+        typealias Input = Int
+        typealias Failure = Never
+        
+        func receive(subscription: Subscription) {
+            subscription.request(.max(2))
+        }
+        
+        func receive(_ input: Int) -> Subscribers.Demand {
+            print("Receive value", input)
+            
+            switch input {
+            case 1:
+                return .max(2) // 1 The new max is 4 (original max of 2 + new max of 2)
+            case 3:
+                return .max(1) // 2 The new max is 5 (previous 4 + new 1)
+            default:
+                return .none // 3 Max remains 5 (previous 4 + new 0)
+            }
+        }
+        
+        func receive(completion: Subscribers.Completion<Never>) {
+            print("Receive completion", completion)
+        }
+    }
+    
+    let subscriber = IntSubscriber()
+    
+    let subject = PassthroughSubject<Int, Never>()
+    
+    subject.subscribe(subscriber)
+    
+    subject.send(1)
+    subject.send(2)
+    subject.send(3)
+    subject.send(4)
+    subject.send(5)
+    subject.send(6)
+    
+    // Last value not printed out
+}
+
+// MARK: - Type erasure
+
+example(of: "Type erasure") {
+    // 1 Create passthrough subject
+    let subject = PassthroughSubject<Int, Never>()
+    
+    // 2 Create a type erase subject
+    let publisher = subject.eraseToAnyPublisher()
+    
+    // 3 subscribe to type erased publisher
+    publisher
+        .sink(receiveValue: { print($0) })
+        .store(in: &subscriptions)
+    
+    // 4 send new value through passthrough subject
+    subject.send(0)
+    
+    //publisher.send(1)
+}
+
