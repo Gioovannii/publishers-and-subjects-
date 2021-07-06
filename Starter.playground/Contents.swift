@@ -41,7 +41,7 @@ example(of: "Publisher") {
     let myNotification = Notification.Name("MyNotification")
     
     // 2 Access notification center call it's publisher method and assign value to a constant
-    let _ = NotificationCenter.default
+    let subscription = NotificationCenter.default
         .publisher(for: myNotification, object: nil)
     
     // 3 Get a handle to the notification center
